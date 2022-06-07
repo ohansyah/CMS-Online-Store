@@ -47,8 +47,7 @@ class BannerController extends Controller
     {
         return Datatables::of(Banner::query())
             ->addColumn('image', function ($model) {
-                $url = (!filter_var($model->image, FILTER_VALIDATE_URL) === false) ? $model->image : url($this->image_storage . '/' . $model->image);
-                return '<img src=' . $url . ' class="img-thumbnail-sm" />';
+                return '<img src=' . $model->image_url . ' class="img-thumbnail-sm" />';
             })
             ->addColumn('action', 'admin.banner.datatable-action')
             ->rawColumns(['image', 'action'])

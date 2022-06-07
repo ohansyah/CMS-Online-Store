@@ -40,6 +40,17 @@ class Banner extends Model
     public function getImageUrlAttribute()
     {
         $image_storage = \Config::get('constants.image_storage.banner');
-        return url($image_storage . '/' . $this->image);
+
+        $url = $this->image;
+        if($this->image){
+            if (!filter_var($this->image, FILTER_VALIDATE_URL)) {
+                $url = url($image_storage . '/' . $this->image);
+            }
+        }else{
+            $url = \Config::get('constants.image_storage.no_image');
+        }
+        
+
+        return $url;
     }
 }
