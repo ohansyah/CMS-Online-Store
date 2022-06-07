@@ -4,7 +4,7 @@ namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
-use App\Models\Categories;
+use App\Models\Category;
 use App\Models\Product;
 
 class HomeController extends Controller
@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $banners = Banner::banner()->active()->orderBy('id', 'desc')->limit(5)->get();
-        $categories = Categories::parentCategory()->limit(8)->get();
+        $categories = Category::parentCategory()->limit(8)->get();
         $products = Product::orderBy('id', 'desc')->paginate(12);
         return view('app.index')
             ->with('banners', $banners)

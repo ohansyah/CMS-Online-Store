@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
-use App\Models\Categories;
+use App\Models\Category;
 use App\Models\Product;
 use App\Traits\BreadCrumb;
 
@@ -32,8 +32,9 @@ class DashboardController extends Controller
     {
         $now = date('Y-m-d H:i:s');
         $count = [
-            'banner' => Banner::active()->count(),
-            'category' => Categories::count(),
+            'banner' => Banner::count(),
+            'banner_active' => Banner::active()->count(),
+            'category' => Category::count(),
             'product' => Product::count(),
         ];
         return view('admin.dashboard.dashboard')
