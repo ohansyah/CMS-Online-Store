@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Categories;
+use App\Models\Category;
 use App\Models\Product;
 use App\Traits\BreadCrumb;
 use App\Traits\ImageTrait;
@@ -65,7 +65,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = Categories::parentCategory()->pluck('name', 'id')->toArray();
+        $categories = Category::parentCategory()->pluck('name', 'id')->toArray();
         return view('admin.product.create')
             ->with('categories', $categories)
             ->with('breadcrumb', $this->BreadCrumbSubtitle('Create'));
@@ -116,7 +116,7 @@ class ProductController extends Controller
             $query->orderBy('is_cover', 'desc');
         }])->findOrFail($id);
 
-        $categories = Categories::pluck('name', 'id')->toArray();
+        $categories = Category::pluck('name', 'id')->toArray();
         return view('admin.product.show')
             ->with('data', $product)
             ->with('categories', $categories)
@@ -135,7 +135,7 @@ class ProductController extends Controller
         $product = Product::with(['productImages' => function ($query) {
             $query->orderBy('is_cover', 'desc');
         }])->findOrFail($id);
-        $categories = Categories::parentCategory()->pluck('name', 'id')->toArray();
+        $categories = Category::parentCategory()->pluck('name', 'id')->toArray();
 
         return view('admin.product.edit')
             ->with('data', $product)
