@@ -83,7 +83,7 @@ class CategoryController extends Controller
         // handling file upload
         $uploadImage = $request->hasFile('image') ? $this->uploadImage($request->file('image'), $this->image_path) : null;
 
-        // Save product data to database
+        // Save category data to database
         CategorySaveHelper::saveFromRequest($request, new Category(), $uploadImage);
 
         return redirect('/admin/category')->with('success', 'Category Created');
@@ -148,7 +148,7 @@ class CategoryController extends Controller
         // handling file upload
         $uploadImage = $request->hasFile('image') ? $this->uploadImage($request->file('image'), $this->image_path) : null;
 
-        // Save product data to database
+        // Save category data to database
         CategorySaveHelper::saveFromRequest($request, $category, $uploadImage);
 
         return redirect('/admin/category')->with('success', 'Category Created');
