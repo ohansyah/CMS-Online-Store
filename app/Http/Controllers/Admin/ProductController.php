@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Libraries\Helper\ProductSaveHelper;
+use App\Http\Libraries\Helper\ProductImageSaveHelper;
 use App\Http\Requests\Admin\Product\ProductStoreRequest;
 use App\Http\Requests\Admin\Product\ProductUpdateRequest;
 use App\Models\Category;
@@ -86,13 +87,7 @@ class ProductController extends Controller
         $product = ProductSaveHelper::saveFromRequest($request, new Product());
 
         // handling file upload
-        foreach ($request->file('images') as $image) {
-            $uploadImage = $this->uploadImage($image, $this->image_path);
-            $product->productImages()->create([
-                'image' => $uploadImage['file_name_to_store'],
-                'is_cover' => 0,
-            ]);
-        }
+        (new ProductImageSaveHelper())->saveFromRequest($request, $product, $this->image_path);
 
         return redirect('/admin/product')->with('success', 'Product Created');
     }
@@ -168,16 +163,10 @@ class ProductController extends Controller
 
         // handling file upload
         if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $uploadImage = $this->uploadImage($image, $this->image_path);
-                $product->productImages()->create([
-                    'image' => $uploadImage['file_name_to_store'],
-                    'is_cover' => 0,
-                ]);
-            }
+            (new ProductImageSaveHelper())->saveFromRequest($request, $product, $this->image_path);
         }
 
-        return redirect('/admin/product')->with('success', 'Product Created');
+        return redirect('/admin/product')->with('success', 'Product Updated');
     }
 
     /**
