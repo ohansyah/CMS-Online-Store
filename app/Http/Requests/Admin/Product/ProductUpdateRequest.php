@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\MaxProductImage;
 
 class ProductUpdateRequest extends FormRequest
 {
@@ -30,7 +31,7 @@ class ProductUpdateRequest extends FormRequest
 
         if ($this->hasFile('images')) {
             $rules = array_merge($rules, [
-                'images.*' => 'image|nullable|mimes:jpg,jpeg,png|max:2000',
+                'images.*' => ['image','nullable','mimes:jpg,jpeg,png','max:2000', new MaxProductImage],
             ]);
         }
 

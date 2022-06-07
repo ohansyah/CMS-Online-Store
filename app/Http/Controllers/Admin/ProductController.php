@@ -144,15 +144,6 @@ class ProductController extends Controller
 
         $product = Product::findOrFail($id);
 
-        // validate total image
-        $count_deleted = $request->deleted_images ? count($request->deleted_images) : 0;
-        $count_new = $request->images ? count($request->images) : 0;
-        $count_existing = $product->productImages()->count();
-        $max_image = \Config::get('constants.max_product_image');
-        if ($count_existing - $count_deleted + $count_new > $max_image) {
-            return redirect()->back()->with('error', 'Max ' . $max_image . ' images allowed');
-        }
-
         // Save product data to database
         $product = ProductSaveHelper::saveFromRequest($request, $product);
 
