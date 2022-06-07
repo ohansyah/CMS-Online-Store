@@ -32,7 +32,8 @@ class DashboardController extends Controller
     {
         $now = date('Y-m-d H:i:s');
         $count = [
-            'banner' => Banner::active()->count(),
+            'banner' => Banner::count(),
+            'banner_active' => Banner::active()->count(),
             'category' => Categories::count(),
             'product' => Product::count(),
         ];

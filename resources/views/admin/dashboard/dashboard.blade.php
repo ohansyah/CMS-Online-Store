@@ -21,7 +21,8 @@
                                         <i class="bi-badge-ad"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>{{$count['banner']}}</h6>
+                                        <h6>{{$count['banner_active']}}<span class="text-muted small pt-2 ps-1">Active</span></h6>
+                                        <span class="text-muted small pt-2 ps-1">from total {{$count['banner']}} Banner</span>
                                     </div>
                                 </div>
                             </div>
