@@ -3,18 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Categories;
+use App\Models\Category;
 use App\Traits\BreadCrumb;
 use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Yajra\Datatables\Datatables;
-
+use App\Http\Requests\Admin\CategoryRequest;
+use App\Http\Libraries\Helper\CategorySaveHelper;
 class CategoryController extends Controller
 {
-
-    use ImageTrait;
-    use BreadCrumb;
+    use ImageTrait, BreadCrumb;
 
     private $image_path;
     private $image_storage;
@@ -45,7 +44,7 @@ class CategoryController extends Controller
      */
     public function datatable()
     {
-        return Datatables::of(Categories::query())
+        return Datatables::of(Category::query())
             ->addColumn('parent', function ($model) {
                 return $model->parent->name ?? '-';
             })
@@ -65,11 +64,10 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = Categories::pluck('name', 'id')->toArray();
+        $categories = Category::pluck('name', 'id')->toArray();
         return view('admin.category.create')
             ->with('categories', $categories)
             ->with('breadcrumb', $this->BreadCrumbSubtitle('Create'));
-
     }
 
     /**
@@ -78,21 +76,15 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'image' => 'image|nullable|max:4000',
-        ]);
+        $request->validated();
 
         // handling file upload
         $uploadImage = $request->hasFile('image') ? $this->uploadImage($request->file('image'), $this->image_path) : null;
 
-        $category = new Categories();
-        $category->parent_id = $request->input('parent_id');
-        $category->name = $request->input('name');
-        $category->image = $uploadImage['file_name_to_store'] ?: $uploadImage;
-        $category->save();
+        // Save banner data to database
+        CategorySaveHelper::saveFromRequest($request, new Category(), $uploadImage);
 
         return redirect('/admin/category')->with('success', 'Category Created');
     }
@@ -105,9 +97,9 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = Categories::findOrFail($id);
+        $category = Category::findOrFail($id);
         $category->image_url = url($this->image_storage . '/' . $category->image);
-        $categories = Categories::pluck('name', 'id')->toArray();
+        $categories = Category::pluck('name', 'id')->toArray();
 
         return view('admin.category.show')
             ->with('data', $category)
@@ -123,8 +115,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Categories::findOrFail($id);
-        $categories = Categories::where('id', '!=', $id)->pluck('name', 'id')->toArray();
+        $category = Category::findOrFail($id);
+        $categories = Category::where('id', '!=', $id)->pluck('name', 'id')->toArray();
 
         return view('admin.category.edit')
             ->with('data', $category)
@@ -139,14 +131,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'image' => 'image|nullable|max:4000',
-        ]);
+        $request->validated();
 
-        $category = Categories::findOrFail($id);
+        $category = Category::findOrFail($id);
         if ($category->parent_id == 0) {
             $request['parent_id'] = 0;
         } else if ($request->input('parent_id') == $category->id) {
@@ -158,9 +147,9 @@ class CategoryController extends Controller
 
         // handling file upload
         $uploadImage = $request->hasFile('image') ? $this->uploadImage($request->file('image'), $this->image_path) : null;
-        $category->image = $uploadImage['file_name_to_store'] ?: $category->image;
 
-        $category->save();
+        // Save banner data to database
+        CategorySaveHelper::saveFromRequest($request, $category, $uploadImage);
 
         return redirect('/admin/category')->with('success', 'Category Created');
     }
@@ -173,7 +162,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Categories::findOrFail($id);
+        $category = Category::findOrFail($id);
         if ($category->image) {
             Storage::delete($this->image_path . '/' . $category->image);
         }
