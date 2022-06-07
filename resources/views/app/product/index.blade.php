@@ -9,7 +9,7 @@
                     <div class="card m-0 shadow-sm">
                         <div class="card-body-product">
                             <a href="{{ route('app.product.show', $product->id) }}">
-                                <img src="{{ $product->image_url }}" class="img-thumbnail-product rounded mx-auto d-block"
+                                <img src="{{ $product->cover_image_url }}" class="img-thumbnail-product rounded mx-auto d-block"
                                     alt="...">
                             </a>
                             <h5 class="text-title-sm p-0 mt-1">
