@@ -32,7 +32,7 @@
         <div class="row mt-3">
             {{ Form::label('images', 'Images', ['class' => 'col-sm-2 col-form-label']) }}
             <div class="col-md-4 col-sm-10">
-                {{ Form::file('images[]', ['class' => 'form-control','multiple','required' => 'required','onchange' => 'previewImages()','id' => 'image']) }}
+                {{ Form::file('images[]', ['class' => 'form-control', 'multiple', 'required' => 'required', 'onchange' => 'previewImages()', 'id' => 'image']) }}
             </div>
         </div>
 
@@ -55,5 +55,10 @@
 @endsection
 
 @push('scripts')
+    <script>
+        $("#formData").on("submit", function() {
+            $("#quill-text").val($("#quill-container").children().first().html());
+        })
+    </script>
     <script src="{{ asset('niceadmin/js/image-preview.js') }}"></script>
 @endpush
