@@ -27,7 +27,7 @@ class HomeController extends Controller
     {
         $banners = Banner::banner()->active()->orderBy('id', 'desc')->limit(5)->get();
         $categories = Category::parentCategory()->limit(8)->get();
-        $products = Product::orderBy('id', 'desc')->paginate(12);
+        $products = Product::with(['category','productImages'])->orderBy('id', 'desc')->paginate(12);
         return view('app.index')
             ->with('banners', $banners)
             ->with('categories', $categories)
