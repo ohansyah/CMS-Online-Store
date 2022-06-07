@@ -14,7 +14,6 @@ use Yajra\Datatables\Datatables;
 
 class BannerController extends Controller
 {
-
     use ImageTrait, BreadCrumb;
 
     private $image_path;
@@ -74,7 +73,7 @@ class BannerController extends Controller
      */
     public function store(BannerRequest $request)
     {
-        $validated = $request->validated();
+        $request->validated();
 
         // handling file upload
         $uploadImage = $request->hasFile('image') ? $this->uploadImage($request->file('image'), $this->image_path) : null;
@@ -123,7 +122,7 @@ class BannerController extends Controller
      */
     public function update(BannerRequest $request, $id)
     {
-        $validated = $request->validated();
+        $request->validated();
 
         // handling file upload
         $uploadImage = $request->hasFile('image') ? $this->uploadImage($request->file('image'), $this->image_path) : null;
