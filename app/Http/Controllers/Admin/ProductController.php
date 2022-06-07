@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Libraries\Helper\ProductSaveHelper;
+use App\Http\Requests\Admin\Product\ProductStoreRequest;
+use App\Http\Requests\Admin\Product\ProductUpdateRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Traits\BreadCrumb;
@@ -13,9 +16,7 @@ use Yajra\Datatables\Datatables;
 
 class ProductController extends Controller
 {
-
-    use ImageTrait;
-    use BreadCrumb;
+    use ImageTrait, BreadCrumb;
 
     private $image_path;
     private $image_storage;
@@ -77,20 +78,12 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductStoreRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'category_id' => 'required',
-            'images' => 'array|max:5',
-            'images.*' => 'image|required|max:4000',
-        ]);
+        $request->validated();
 
-        $product = new Product();
-        $product->category_id = $request->input('category_id');
-        $product->name = $request->input('name');
-        $product->description = $request->input('description');
-        $product->save();
+        // Save product data to database
+        $product = ProductSaveHelper::saveFromRequest($request, new Product());
 
         // handling file upload
         foreach ($request->file('images') as $image) {
@@ -150,20 +143,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductUpdateRequest $request, $id)
     {
-        $validateRequests = [
-            'name' => 'required',
-            'category_id' => 'required',
-        ];
-
-        if ($request->hasFile('images')) {
-            $validateRequests = array_merge($validateRequests, [
-                'images.*' => 'image|nullable|mimes:jpg,jpeg,png|max:2000',
-            ]);
-        }
-
-        $this->validate($request, $validateRequests);
+        $request->validated();
 
         $product = Product::findOrFail($id);
 
@@ -176,11 +158,8 @@ class ProductController extends Controller
             return redirect()->back()->with('error', 'Max ' . $max_image . ' images allowed');
         }
 
-        // save product
-        $product->category_id = $request->input('category_id');
-        $product->name = $request->input('name');
-        $product->description = $request->input('description');
-        $product->save();
+        // Save product data to database
+        $product = ProductSaveHelper::saveFromRequest($request, $product);
 
         // deleted images
         if ($request->deleted_images) {
