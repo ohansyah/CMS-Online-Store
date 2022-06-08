@@ -49,8 +49,11 @@ class BannerController extends Controller
             ->addColumn('image', function ($model) {
                 return '<img src=' . $model->image_url . ' class="img-thumbnail-sm" />';
             })
+            ->addColumn('status', function ($model) {
+                return $model->status ? '<span class="badge bg-primary">Active</span>' : '<span class="badge bg-secondary">Inactive</span>';
+            })
             ->addColumn('action', 'admin.banner.datatable-action')
-            ->rawColumns(['image', 'action'])
+            ->rawColumns(['image', 'status', 'action'])
             ->toJson();
     }
 
