@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Categories;
+use App\Http\Libraries\Helper\ProductSaveHelper;
+use App\Http\Libraries\Helper\ProductImageSaveHelper;
+use App\Http\Requests\Admin\Product\ProductStoreRequest;
+use App\Http\Requests\Admin\Product\ProductUpdateRequest;
+use App\Models\Category;
 use App\Models\Product;
 use App\Traits\BreadCrumb;
 use App\Traits\ImageTrait;
@@ -13,9 +17,7 @@ use Yajra\Datatables\Datatables;
 
 class ProductController extends Controller
 {
-
-    use ImageTrait;
-    use BreadCrumb;
+    use ImageTrait, BreadCrumb;
 
     private $image_path;
     private $image_storage;
@@ -65,7 +67,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = Categories::parentCategory()->pluck('name', 'id')->toArray();
+        $categories = Category::parentCategory()->pluck('name', 'id')->toArray();
         return view('admin.product.create')
             ->with('categories', $categories)
             ->with('breadcrumb', $this->BreadCrumbSubtitle('Create'));
@@ -77,29 +79,15 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductStoreRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'category_id' => 'required',
-            'images' => 'array|max:5',
-            'images.*' => 'image|required|max:4000',
-        ]);
+        $request->validated();
 
-        $product = new Product();
-        $product->category_id = $request->input('category_id');
-        $product->name = $request->input('name');
-        $product->description = $request->input('description');
-        $product->save();
+        // Save product data to database
+        $product = ProductSaveHelper::saveFromRequest($request, new Product());
 
         // handling file upload
-        foreach ($request->file('images') as $image) {
-            $uploadImage = $this->uploadImage($image, $this->image_path);
-            $product->productImages()->create([
-                'image' => $uploadImage['file_name_to_store'],
-                'is_cover' => 0,
-            ]);
-        }
+        (new ProductImageSaveHelper())->saveFromRequest($request, $product, $this->image_path);
 
         return redirect('/admin/product')->with('success', 'Product Created');
     }
@@ -116,7 +104,7 @@ class ProductController extends Controller
             $query->orderBy('is_cover', 'desc');
         }])->findOrFail($id);
 
-        $categories = Categories::pluck('name', 'id')->toArray();
+        $categories = Category::pluck('name', 'id')->toArray();
         return view('admin.product.show')
             ->with('data', $product)
             ->with('categories', $categories)
@@ -135,7 +123,7 @@ class ProductController extends Controller
         $product = Product::with(['productImages' => function ($query) {
             $query->orderBy('is_cover', 'desc');
         }])->findOrFail($id);
-        $categories = Categories::parentCategory()->pluck('name', 'id')->toArray();
+        $categories = Category::parentCategory()->pluck('name', 'id')->toArray();
 
         return view('admin.product.edit')
             ->with('data', $product)
@@ -150,37 +138,14 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductUpdateRequest $request, $id)
     {
-        $validateRequests = [
-            'name' => 'required',
-            'category_id' => 'required',
-        ];
-
-        if ($request->hasFile('images')) {
-            $validateRequests = array_merge($validateRequests, [
-                'images.*' => 'image|nullable|mimes:jpg,jpeg,png|max:2000',
-            ]);
-        }
-
-        $this->validate($request, $validateRequests);
+        $request->validated();
 
         $product = Product::findOrFail($id);
 
-        // validate total image
-        $count_deleted = $request->deleted_images ? count($request->deleted_images) : 0;
-        $count_new = $request->images ? count($request->images) : 0;
-        $count_existing = $product->productImages()->count();
-        $max_image = \Config::get('constants.max_product_image');
-        if ($count_existing - $count_deleted + $count_new > $max_image) {
-            return redirect()->back()->with('error', 'Max ' . $max_image . ' images allowed');
-        }
-
-        // save product
-        $product->category_id = $request->input('category_id');
-        $product->name = $request->input('name');
-        $product->description = $request->input('description');
-        $product->save();
+        // Save product data to database
+        $product = ProductSaveHelper::saveFromRequest($request, $product);
 
         // deleted images
         if ($request->deleted_images) {
@@ -189,16 +154,10 @@ class ProductController extends Controller
 
         // handling file upload
         if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $uploadImage = $this->uploadImage($image, $this->image_path);
-                $product->productImages()->create([
-                    'image' => $uploadImage['file_name_to_store'],
-                    'is_cover' => 0,
-                ]);
-            }
+            (new ProductImageSaveHelper())->saveFromRequest($request, $product, $this->image_path);
         }
 
-        return redirect('/admin/product')->with('success', 'Product Created');
+        return redirect('/admin/product')->with('success', 'Product Updated');
     }
 
     /**

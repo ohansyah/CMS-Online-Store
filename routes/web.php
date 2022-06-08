@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController as AdminUser;
-
+use App\Http\Controllers\Admin\GeneralSettingController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,4 +56,8 @@ Route::prefix('admin')->group(function () {
     // product
     Route::get('product/datatable', [ProductController::class, 'datatable'])->name('product.datatables');
     Route::resource('product', ProductController::class);
+
+    // general setting
+    Route::get('general-setting/datatable', [GeneralSettingController::class, 'datatable'])->name('general-setting.datatables');
+    Route::resource('general-setting', GeneralSettingController::class);
 });

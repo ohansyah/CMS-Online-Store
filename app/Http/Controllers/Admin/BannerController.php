@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Libraries\Helper\BannerSaveHelper;
+use App\Http\Requests\Admin\BannerRequest;
 use App\Models\Banner;
 use App\Traits\BreadCrumb;
 use App\Traits\ImageTrait;
@@ -12,9 +14,7 @@ use Yajra\Datatables\Datatables;
 
 class BannerController extends Controller
 {
-
-    use ImageTrait;
-    use BreadCrumb;
+    use ImageTrait, BreadCrumb;
 
     private $image_path;
     private $image_storage;
@@ -47,8 +47,7 @@ class BannerController extends Controller
     {
         return Datatables::of(Banner::query())
             ->addColumn('image', function ($model) {
-                $url = (!filter_var($model->image, FILTER_VALIDATE_URL) === false) ? $model->image : url($this->image_storage . '/' . $model->image);
-                return '<img src=' . $url . ' class="img-thumbnail-sm" />';
+                return '<img src=' . $model->image_url . ' class="img-thumbnail-sm" />';
             })
             ->addColumn('action', 'admin.banner.datatable-action')
             ->rawColumns(['image', 'action'])
@@ -71,27 +70,15 @@ class BannerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BannerRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'type' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'image' => 'image|nullable|max:4000',
-        ]);
+        $request->validated();
 
         // handling file upload
         $uploadImage = $request->hasFile('image') ? $this->uploadImage($request->file('image'), $this->image_path) : null;
 
-        $banner = new Banner();
-        $banner->name = $request->input('name');
-        $banner->description = $request->input('description');
-        $banner->type = $request->input('type');
-        $banner->start_date = $request->input('start_date');
-        $banner->end_date = $request->input('end_date');
-        $banner->image = $uploadImage['file_name_to_store'] ?: $uploadImage;
-        $banner->save();
+        // Save banner data to database
+        BannerSaveHelper::saveFromRequest($request, new Banner(), $uploadImage);
 
         return redirect('/admin/banner')->with('success', 'Banner Created');
     }
@@ -132,28 +119,15 @@ class BannerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BannerRequest $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'type' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'image' => 'image|nullable|max:4000',
-        ]);
+        $request->validated();
 
         // handling file upload
         $uploadImage = $request->hasFile('image') ? $this->uploadImage($request->file('image'), $this->image_path) : null;
 
-        $banner = Banner::findOrFail($id);
-        $banner->name = $request->input('name');
-        $banner->description = $request->input('description');
-        $banner->type = $request->input('type');
-        $banner->start_date = $request->input('start_date');
-        $banner->end_date = $request->input('end_date');
-        $banner->image = $uploadImage['file_name_to_store'] ?: $banner->image;
-
-        $banner->save();
+        // Save banner data to database
+        BannerSaveHelper::saveFromRequest($request, Banner::findOrFail($id), $uploadImage);
 
         return redirect('/admin/banner')->with('success', 'Banner Updated');
     }

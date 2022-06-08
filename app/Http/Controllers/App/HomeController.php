@@ -4,7 +4,8 @@ namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
-use App\Models\Categories;
+use App\Models\Category;
+use App\Models\GeneralSetting;
 use App\Models\Product;
 
 class HomeController extends Controller
@@ -25,10 +26,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $wa_link = GeneralSetting::where('name', 'wa_link')->first()->value;
+
         $banners = Banner::banner()->active()->orderBy('id', 'desc')->limit(5)->get();
-        $categories = Categories::parentCategory()->limit(8)->get();
-        $products = Product::orderBy('id', 'desc')->paginate(12);
+        $categories = Category::parentCategory()->limit(8)->get();
+        $products = Product::with(['category', 'productImages'])->orderBy('id', 'desc')->paginate(12);
         return view('app.index')
+            ->with('wa_link', $wa_link)
             ->with('banners', $banners)
             ->with('categories', $categories)
             ->with('products', $products);

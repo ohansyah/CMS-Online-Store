@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Categories extends Model
+class Category extends Model
 {
     use SoftDeletes;
 
@@ -19,12 +19,12 @@ class Categories extends Model
 
     public function parent()
     {
-        return $this->belongsTo(Categories::class, 'parent_id');
+        return $this->belongsTo(Category::class, 'parent_id');
     }
 
     public function children()
     {
-        return $this->hasMany(Categories::class, 'parent_id');
+        return $this->hasMany(Category::class, 'parent_id');
     }
 
     public function scopeParentCategory($query)
