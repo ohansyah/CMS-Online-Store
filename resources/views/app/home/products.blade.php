@@ -8,8 +8,8 @@
                  <div class="card m-0 shadow-sm">
                      <div class="card-body-product">
                          <a href="{{ route('app.product.show', $product->id) }}">
-                             <img src="{{ $product->cover_image_url }}" class="img-thumbnail-product rounded mx-auto d-block"
-                                 alt="...">
+                             <img src="{{ $product->cover_image_url }}"
+                                 class="img-thumbnail-product rounded mx-auto d-block" alt="...">
                          </a>
                          <h5 class="text-title-sm p-0 mt-1">
                              @if (strlen($product->name) < 18)
@@ -18,9 +18,10 @@
                                  {{ substr($product->name, 0, 16) }} ...
                              @endif
                          </h5>
-                         <h6 class="text-small">Rp 123.000</h6>
+                         <h6 class="text-small">{{$product->category->name}}</h6>
                          <div class="d-grid gap-2 ">
-                             <a href="#" class="btn btn-primary "><i class="bi bi-cart-check-fill"></i> +</a>
+                             <a href="{{ $wa_link }}" target="_blank" class="btn btn-primary "><i
+                                     class="bi bi-whatsapp"></i> Whatsapp</a>
                          </div>
                      </div>
                  </div>
