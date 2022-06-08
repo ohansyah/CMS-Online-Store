@@ -42,15 +42,24 @@ class Banner extends Model
         $image_storage = \Config::get('constants.image_storage.banner');
 
         $url = $this->image;
-        if($this->image){
+        if ($this->image) {
             if (!filter_var($this->image, FILTER_VALIDATE_URL)) {
                 $url = url($image_storage . '/' . $this->image);
             }
-        }else{
+        } else {
             $url = \Config::get('constants.image_storage.no_image');
         }
-        
 
         return $url;
+    }
+
+    public function getStatusAttribute()
+    {
+        $now = date('Y-m-d H:i:s');
+        if ($this->start_date <= $now && $this->end_date >= $now) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

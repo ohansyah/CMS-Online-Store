@@ -13,6 +13,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Image</th>
                     <th scope="col">Type</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Start Date</th>
                     <th scope="col">End Date</th>
                     <th scope="col">#</th>
@@ -49,6 +50,10 @@
                     {
                         data: 'type',
                         name: 'type'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
                     },
                     {
                         data: 'start_date',
