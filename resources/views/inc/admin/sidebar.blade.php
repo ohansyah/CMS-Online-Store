@@ -33,6 +33,15 @@
                   <span>Product</span>
               </a>
           </li><!-- End F.A.Q Page Nav -->
+
+          <li class="nav-heading">System</li>
+          <li class="nav-item">
+              <a class="nav-link {{ Request::segment(2) == 'general-setting' ?: 'collapsed' }}" href="{{ route('general-setting.index') }}">
+                  <i class="bi-gear"></i>
+                  <span>General Setting</span>
+              </a>
+          </li><!-- End Profile Page Nav -->
+
       </ul>
 
   </aside><!-- End Sidebar-->
