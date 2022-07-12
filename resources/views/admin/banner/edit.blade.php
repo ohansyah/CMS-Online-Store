@@ -17,13 +17,13 @@
         </div>
         <div class="row mt-3">
             {{ Form::label('start_date', 'Start Date', ['class' => 'col-sm-2 col-form-label']) }}
-            <div class="col-sm-10">
+            <div class="col-md-4 col-sm-10">
                 {!! Form::input('dateTime-local','start_date', \Carbon\Carbon::parse($data->start_date)->format('Y-m-d\TH:i'), ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Start Date']) !!}
             </div>
         </div>
         <div class="row mt-3">
             {{ Form::label('end_date', 'End Date', ['class' => 'col-sm-2 col-form-label']) }}
-            <div class="col-sm-10">
+            <div class="col-md-4 col-sm-10">
                 {!! Form::input('dateTime-local','end_date', \Carbon\Carbon::parse($data->end_date)->format('Y-m-d\TH:i'), ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Start Date']) !!}
             </div>
         </div>
