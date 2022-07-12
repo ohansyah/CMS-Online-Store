@@ -1113,8 +1113,8 @@ h1, h2, h3, h4, h5, h6 {
 .categories {
   text-decoration: none;
   position: relative;
-  min-width: 100px;
-  max-width: 120px;
+  min-width: 120px;
+  max-width: 150px;
   margin: 0 auto;
 }
 
@@ -1131,4 +1131,14 @@ h1, h2, h3, h4, h5, h6 {
   height: 400px;
   object-fit: cover;
   max-width: 100%
+}
+
+.h-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: #cfe2ff;
+}
+
+.h-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #9dc3f8;
 }
