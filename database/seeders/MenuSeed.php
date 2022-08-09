@@ -78,7 +78,7 @@ class MenuSeed extends Seeder
             'classification_inner_order' => 0,
         ], [
             'parent_id' => null,
-            'name' => 'Category',
+            'name' => 'General Setting',
             'type' => 'menu',
             'classification' => 'System',
             'icon' => 'bi-gear',
