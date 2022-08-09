@@ -151,7 +151,7 @@ class CategoryController extends Controller
         // Save category data to database
         CategorySaveHelper::saveFromRequest($request, $category, $uploadImage);
 
-        return redirect('/admin/category')->with('success', 'Category Created');
+        return redirect('/admin/category')->with('success', 'Category Updated');
     }
 
     /**

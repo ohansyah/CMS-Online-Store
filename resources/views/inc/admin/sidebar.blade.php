@@ -1,47 +1,20 @@
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
-
       <ul class="sidebar-nav" id="sidebar-nav">
 
-          <li class="nav-item">
-              <a class="nav-link {{ Request::segment(2) == 'dashboard' ?: 'collapsed' }}" href="{{ route('dashboard') }}">
-                  <i class="bi-grid"></i>
-                  <span>Dashboard</span>
-              </a>
-          </li><!-- End Dashboard Nav -->
-
-          <li class="nav-heading">Featured</li>
-          <li class="nav-item">
-              <a class="nav-link {{ Request::segment(2) == 'banner' ?: 'collapsed' }}" href="{{ route('banner.index') }}">
-                  <i class="bi-badge-ad"></i>
-                  <span>Banner</span>
-              </a>
-          </li><!-- End Profile Page Nav -->
-
-
-          <li class="nav-heading">Master Data</li>
-          <li class="nav-item">
-              <a class="nav-link {{ Request::segment(2) == 'category' ?: 'collapsed' }}" href="{{ route('category.index') }}">
-                  <i class="bi-columns-gap"></i>
-                  <span>Category</span>
-              </a>
-          </li><!-- End Profile Page Nav -->
-
-          <li class="nav-item">
-              <a class="nav-link {{ Request::segment(2) == 'product' ?: 'collapsed' }}" href="{{ route('product.index') }}">
-                  <i class="bi-box-seam"></i>
-                  <span>Product</span>
-              </a>
-          </li><!-- End F.A.Q Page Nav -->
-
-          <li class="nav-heading">System</li>
-          <li class="nav-item">
-              <a class="nav-link {{ Request::segment(2) == 'general-setting' ?: 'collapsed' }}" href="{{ route('general-setting.index') }}">
-                  <i class="bi-gear"></i>
-                  <span>General Setting</span>
-              </a>
-          </li><!-- End Profile Page Nav -->
+          @foreach ($Menus as $menu)
+              @if ($menu->type == 'menu')
+                  <li class="nav-item">
+                      <a class="nav-link {{ Request::segment(2) == $menu->route_segment_2 ?: 'collapsed' }}"
+                          href="{{ route($menu->route) }}">
+                          <i class="{{ $menu->icon }}"></i>
+                          <span class="title">{{ $menu->name }}</span>
+                      </a>
+                  </li>
+              @elseif ($menu->type == 'header')
+                  <li class="nav-heading">{{ $menu->name }}</li>
+              @endif
+          @endforeach
 
       </ul>
-
   </aside><!-- End Sidebar-->
