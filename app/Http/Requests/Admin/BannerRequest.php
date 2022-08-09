@@ -28,7 +28,7 @@ class BannerRequest extends FormRequest
             'type' => 'required',
             'start_date' => 'required',
             'end_date' => 'required',
-            'image' => 'required|image|max:4000',
+            'image' => 'nullable|image|max:4000',
         ];
     }
 }
