@@ -23,6 +23,15 @@ class Menu extends Model
         'classification_inner_order',
     ];
 
+    protected $appends = [
+        'route_segment_2',
+    ];
+
+    public function getRouteSegment2Attribute()
+    {
+        return $this->route ? explode('.', $this->route)[0] : null;
+    }
+
     public function scopeGetOrderedMenu($query)
     {
         return $query->orderBy('classification_order', 'asc')
