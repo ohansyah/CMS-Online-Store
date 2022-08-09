@@ -34,7 +34,8 @@ class Menu extends Model
 
     public function scopeGetOrderedMenu($query)
     {
-        return $query->orderBy('classification_order', 'asc')
+        return $query->select('type', 'classification', 'name', 'icon', 'route')
+            ->orderBy('classification_order', 'asc')
             ->orderBy('classification_inner_order', 'asc');
     }
 }
