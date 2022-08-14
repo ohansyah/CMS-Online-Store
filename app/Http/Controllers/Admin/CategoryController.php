@@ -44,7 +44,7 @@ class CategoryController extends Controller
      */
     public function datatable()
     {
-        return Datatables::of(Category::query())
+        return Datatables::of(Category::query()->with(['parent']))
             ->addColumn('parent', function ($model) {
                 return $model->parent->name ?? '-';
             })
