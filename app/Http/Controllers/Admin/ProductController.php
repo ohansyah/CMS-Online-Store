@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Libraries\Helper\ProductSaveHelper;
 use App\Http\Libraries\Helper\ProductImageSaveHelper;
+use App\Http\Libraries\Helper\ProductSaveHelper;
 use App\Http\Requests\Admin\Product\ProductStoreRequest;
 use App\Http\Requests\Admin\Product\ProductUpdateRequest;
 use App\Models\Category;
@@ -48,7 +48,7 @@ class ProductController extends Controller
      */
     public function datatable()
     {
-        return Datatables::of(Product::query())
+        return Datatables::of(Product::query()->with(['category', 'productImages']))
             ->addColumn('category', function ($model) {
                 return $model->category->name ?? '-';
             })

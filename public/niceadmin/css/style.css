@@ -1110,14 +1110,6 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 auto;
 }
 
-.categories {
-  text-decoration: none;
-  position: relative;
-  min-width: 120px;
-  max-width: 150px;
-  margin: 0 auto;
-}
-
 .rounded15 {
   border-radius: 15px;
 }
@@ -1134,11 +1126,50 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .h-scrollbar::-webkit-scrollbar {
-  width: 8px;
   height: 8px;
-  background-color: #cfe2ff;
+  background: transparent;
 }
 
-.h-scrollbar::-webkit-scrollbar-thumb {
+.h-scrollbar:hover::-webkit-scrollbar {
+  height: 8px;
+  background-color: #cfe2ff;;
+}
+
+.h-scrollbar:hover::-webkit-scrollbar-thumb {
   background-color: #9dc3f8;
 }
+
+/*--------------------------------------------------------------
+# Horizontal Scrolling
+--------------------------------------------------------------*/
+.hs {
+  --gutter: 20px;
+  display: grid;
+  grid-gap: calc(var(--gutter) / 2);
+  grid-template-columns: 0px;
+  grid-template-rows: minmax(150px, 1fr);
+  grid-auto-flow: column;
+  grid-auto-columns: calc(50% - var(--gutter) * 5);
+  overflow-x: scroll;
+  scroll-snap-type: x proximity;
+  padding-left: 0px;
+}
+
+.hs:before,
+.hs:after {
+  content: "";
+  width: 10px;
+}
+
+.hs > li,
+.item {
+  scroll-snap-align: center;
+  padding: calc(var(--gutter) / 2 * 1.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 8px;
+}
+
