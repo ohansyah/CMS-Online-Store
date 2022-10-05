@@ -1,6 +1,6 @@
 <div class="col-lg-3 col-md-6">
     <div class="single-product">
-        <a href="{{ route('app.product.show', ['product' => $product->id]) }}" target="_blank" rel="noopener noreferrer">
+        <a href="{{ route('app.product.show', ['product' => $product->id]) }}" rel="noopener noreferrer">
             <img class="img-fluid" src="{{ $product->cover_image_url }}" alt="">
         </a>
         <div class="product-details">
