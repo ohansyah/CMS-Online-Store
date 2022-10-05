@@ -15,9 +15,9 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                     <ul class="nav navbar-nav menu_nav ml-auto">
-                        <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Categories</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="{{ route('app.home.index') }}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('app.product.index') }}">Products</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ route('app.home.index') }}#categories">Categories</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Hot Deals</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
                     </ul>
