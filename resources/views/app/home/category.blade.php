@@ -1,5 +1,5 @@
 <!-- Start category Area -->
-<section class="category-area">
+<section class="category-area" id="categories">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-12 col-md-12">

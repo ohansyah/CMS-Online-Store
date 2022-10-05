@@ -21,7 +21,10 @@ class ProductController extends Controller
 
     public function show($id)
     {
+        $dealOfTheWeeks = Product::with(['category', 'productImages'])->inRandomOrder()->limit(6)->get();
         $product = Product::findOrFail($id);
-        return view('app.product.show')->with('product', $product);
+        return view('app.product.show')
+            ->with('product', $product)
+            ->with('dealOfTheWeeks', $dealOfTheWeeks);
     }
 }
