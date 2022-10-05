@@ -30,14 +30,14 @@ class HomeController extends Controller
         // $popupBanner = Banner::popup()->active()->first();
         $banners = Banner::banner()->active()->orderBy('id', 'desc')->limit(5)->get();
         $categories = Category::parentCategory()->limit(6)->get();
-        $products = Product::with(['category', 'productImages'])->orderBy('id', 'desc')->paginate(12);
+        $products = Product::with(['category', 'productImages'])->orderBy('id', 'desc')->limit(16)->get();
         
-        // dd($banners);
         return view('app.index')
             ->with('wa_link', $wa_link)
             // ->with('popupBanner', $popupBanner)
             ->with('banners', $banners)
             ->with('categories', $categories)
-            ->with('products', $products);
+            ->with('latestProducts', $products->slice(0,8))
+            ->with('comingProducts', $products->slice(8,8));
     }
 }
