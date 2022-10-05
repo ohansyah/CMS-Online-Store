@@ -2,59 +2,58 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Favicons -->
-    <link href="{{ asset('niceadmin/img/favicon.png') }} " rel="icon">
-    <link href="{{ asset('niceadmin/img/apple-touch-icon.png ') }}" rel="apple-touch-icon">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
-    <link href="{{ asset('niceadmin/vendor/bootstrap/css/bootstrap.min.css') }}?version=11022021-1707"
-        rel="stylesheet">
-    <link href="{{ asset('niceadmin/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-
-    <!-- Template Main CSS File -->
-    <link href="{{ asset('niceadmin/css/style.css?version=8') }}" rel="stylesheet">
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
-
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="{{ asset('karma/img/fav.png') }}">
+    <!-- Author Meta -->
+    <meta name="author" content="CodePixar">
+    <!-- Meta Description -->
+    <meta name="description" content="">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="">
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+    <!-- Site Title -->
+    <title>Karma Shop</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ asset('karma/css/linearicons.css') }}" />
+    <link rel="stylesheet" href="{{ asset('karma/css/font-awesome.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('karma/css/themify-icons.css') }}" />
+    <link rel="stylesheet" href="{{ asset('karma/css/bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ asset('karma/css/owl.carousel.css') }}" />
+    <link rel="stylesheet" href="{{ asset('karma/css/nice-select.css') }}" />
+    <link rel="stylesheet" href="{{ asset('karma/css/nouislider.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('karma/css/ion.rangeSlider.css') }}" />
+    <link rel="stylesheet" href="{{ asset('karma/css/ion.rangeSlider.skinFlat.css') }}" />
+    <link rel="stylesheet" href="{{ asset('karma/css/magnific-popup.css') }}" />
+    <link rel="stylesheet" href="{{ asset('karma/css/main.css') }}" />
 </head>
 
 <body>
+    @include('inc.messages')
+    @include('inc.app.header')
 
-    <main>
-        <div class="outer-container">
-            @include('inc.messages')
-            @yield('content')
-        </div>
-    </main><!-- End #main -->
+    @yield('content')
 
+    @include('inc.app.footer')
 
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
-
-    <!-- Vendor JS Files -->
-    <script src="{{ asset('niceadmin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('niceadmin/vendor/php-email-form/validate.js') }}"></script>
-    <script src="{{ asset('niceadmin/js/custom-main.js') }}"></script>
-
-    <!-- Script from content -->
-    @stack('scripts')
+    <script src="{{ asset('karma/js/vendor/jquery-2.2.4.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous">
+    </script>
+    <script src="{{ asset('karma/js/vendor/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('karma/js/jquery.ajaxchimp.min.js') }}"></script>
+    <script src="{{ asset('karma/js/jquery.nice-select.min.js') }}"></script>
+    <script src="{{ asset('karma/js/jquery.sticky.js') }}"></script>
+    <script src="{{ asset('karma/js/nouislider.min.js') }}"></script>
+    <script src="{{ asset('karma/js/countdown.js') }}"></script>
+    <script src="{{ asset('karma/js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('karma/js/owl.carousel.min.js') }}"></script>
+    <!--gmaps Js-->
+    {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script> --}}
+    <script src="{{ asset('karma/js/gmaps.min.js') }}"></script>
+    <script src="{{ asset('karma/js/main.js') }}"></script>
 </body>
 
 </html>
