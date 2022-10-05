@@ -20,7 +20,7 @@
                             <img src="{{ asset('karma/img/features/f-icon2.png') }}" alt="">
                         </div>
                         <h6>Return Policy</h6>
-                        <p>Free Shipping on all order</p>
+                        <p>Return with new product</p>
                     </div>
                 </div>
                 <!-- single features -->
@@ -30,7 +30,7 @@
                             <img src="{{ asset('karma/img/features/f-icon3.png') }}" alt="">
                         </div>
                         <h6>24/7 Support</h6>
-                        <p>Free Shipping on all order</p>
+                        <p>Anytime Anywhere</p>
                     </div>
                 </div>
                 <!-- single features -->
@@ -40,7 +40,7 @@
                             <img src="{{ asset('karma/img/features/f-icon4.png') }}" alt="">
                         </div>
                         <h6>Secure Payment</h6>
-                        <p>Free Shipping on all order</p>
+                        <p>Credible store</p>
                     </div>
                 </div>
             </div>
