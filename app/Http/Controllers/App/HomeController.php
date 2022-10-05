@@ -32,6 +32,7 @@ class HomeController extends Controller
         $categories = Category::parentCategory()->limit(6)->get();
         $products = Product::with(['category', 'productImages'])->orderBy('id', 'desc')->limit(16)->get();
         $jerseys = Product::with(['category', 'productImages'])->where('category_id', 7)->limit(4)->get();
+        $dealOfTheWeeks = Product::with(['category', 'productImages'])->inRandomOrder()->limit(6)->get();
 
         return view('app.index')
             ->with('wa_link', $wa_link)
@@ -40,6 +41,7 @@ class HomeController extends Controller
             ->with('categories', $categories)
             ->with('latestProducts', $products->slice(0, 8))
             ->with('comingProducts', $products->slice(8, 8))
-            ->with('jerseys', $jerseys);
+            ->with('jerseys', $jerseys)
+            ->with('dealOfTheWeeks', $dealOfTheWeeks);
     }
 }
