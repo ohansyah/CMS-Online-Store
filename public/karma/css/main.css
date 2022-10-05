@@ -5662,7 +5662,7 @@ label {
 /* End Contact Success and error Area css
 ============================================================================================ */
 .footer-area {
-  padding-top: 100px;
+  padding: 36px 0;
   background-color: #222222; }
   .footer-area h6 {
     color: #fff;
@@ -5782,7 +5782,7 @@ label {
   font-weight: 300; }
 
 .footer-text {
-  padding-top: 80px; }
+  padding-top: 0px; }
   @media (max-width: 991px) {
     .footer-text {
       padding-top: 40px; } }
