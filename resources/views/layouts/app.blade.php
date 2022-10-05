@@ -54,6 +54,13 @@
     {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script> --}}
     <script src="{{ asset('karma/js/gmaps.min.js') }}"></script>
     <script src="{{ asset('karma/js/main.js') }}"></script>
+
+    <!-- jScroll -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jscroll/2.4.1/jquery.jscroll.min.js"></script>
+
+    <!-- Script from content -->
+    @stack('scripts')
+
 </body>
 
 </html>
