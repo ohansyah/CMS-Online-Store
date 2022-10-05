@@ -27,14 +27,15 @@ class HomeController extends Controller
     public function index()
     {
         $wa_link = GeneralSetting::where('name', 'wa_link')->first()->value;
-        $popupBanner = Banner::popup()->active()->first();
+        // $popupBanner = Banner::popup()->active()->first();
         $banners = Banner::banner()->active()->orderBy('id', 'desc')->limit(5)->get();
         $categories = Category::parentCategory()->limit(8)->get();
         $products = Product::with(['category', 'productImages'])->orderBy('id', 'desc')->paginate(12);
         
+        // dd($banners);
         return view('app.index')
             ->with('wa_link', $wa_link)
-            ->with('popupBanner', $popupBanner)
+            // ->with('popupBanner', $popupBanner)
             ->with('banners', $banners)
             ->with('categories', $categories)
             ->with('products', $products);
