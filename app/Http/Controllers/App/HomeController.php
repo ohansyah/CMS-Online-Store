@@ -29,7 +29,7 @@ class HomeController extends Controller
         $wa_link = GeneralSetting::where('name', 'wa_link')->first()->value;
         // $popupBanner = Banner::popup()->active()->first();
         $banners = Banner::banner()->active()->orderBy('id', 'desc')->limit(5)->get();
-        $categories = Category::parentCategory()->limit(8)->get();
+        $categories = Category::parentCategory()->limit(6)->get();
         $products = Product::with(['category', 'productImages'])->orderBy('id', 'desc')->paginate(12);
         
         // dd($banners);

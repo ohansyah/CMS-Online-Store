@@ -51,7 +51,7 @@
         <div id="div_image_1" class="row mt-2">
             {{ Form::label('image', 'Image', ['class' => 'col-sm-2 col-form-label']) }}
             <div class="col-sm-10">
-                <img src="{{ $data->image_url }}" alt="" class="img-thumbnail">
+                <img src="{{ $data->image_url }}" alt="" class="img-thumbnail-md">
             </div>
         </div>
 

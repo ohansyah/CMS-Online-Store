@@ -2,67 +2,24 @@
 <section class="category-area">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-8 col-md-12">
+            <div class="col-lg-12 col-md-12">
                 <div class="row">
-                    <div class="col-lg-8 col-md-8">
-                        <div class="single-deal">
-                            <div class="overlay"></div>
-                            <img class="img-fluid w-100" src="{{ asset('karma/img/category/c1.jpg') }}"
-                                alt="">
-                            <a href="img/category/c1.jpg" class="img-pop-up" target="_blank">
-                                <div class="deal-details">
-                                    <h6 class="deal-title">Sneaker for Sports</h6>
-                                </div>
-                            </a>
+
+                    @foreach ($categories as $category)
+                        <div class="col-lg-4 col-md-4">
+                            <div class="single-deal">
+                                <div class="overlay"></div>
+                                <img class="img-fluid w-100" src="{{ $category->image_url }}" alt="">
+                                <a href="{{ route('app.product.index', ['category_id' => $category->id]) }}"
+                                    class="img-pop-up" target="_blank">
+                                    <div class="deal-details">
+                                        <h6 class="deal-title">{{ $category->name }}</h6>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="single-deal">
-                            <div class="overlay"></div>
-                            <img class="img-fluid w-100" src="{{ asset('karma/img/category/c2.jpg') }}"
-                                alt="">
-                            <a href="img/category/c2.jpg" class="img-pop-up" target="_blank">
-                                <div class="deal-details">
-                                    <h6 class="deal-title">Sneaker for Sports</h6>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="single-deal">
-                            <div class="overlay"></div>
-                            <img class="img-fluid w-100" src="{{ asset('karma/img/category/c3.jpg') }}"
-                                alt="">
-                            <a href="img/category/c3.jpg" class="img-pop-up" target="_blank">
-                                <div class="deal-details">
-                                    <h6 class="deal-title">Product for Couple</h6>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-8 col-md-8">
-                        <div class="single-deal">
-                            <div class="overlay"></div>
-                            <img class="img-fluid w-100" src="{{ asset('karma/img/category/c4.jpg') }}"
-                                alt="">
-                            <a href="img/category/c4.jpg" class="img-pop-up" target="_blank">
-                                <div class="deal-details">
-                                    <h6 class="deal-title">Sneaker for Sports</h6>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-deal">
-                    <div class="overlay"></div>
-                    <img class="img-fluid w-100" src="{{ asset('karma/img/category/c5.jpg') }}" alt="">
-                    <a href="img/category/c5.jpg" class="img-pop-up" target="_blank">
-                        <div class="deal-details">
-                            <h6 class="deal-title">Sneaker for Sports</h6>
-                        </div>
-                    </a>
+                    @endforeach
+
                 </div>
             </div>
         </div>
