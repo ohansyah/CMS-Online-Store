@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController as AdminUser;
 use App\Http\Controllers\Admin\GeneralSettingController;
+use Spatie\Health\Http\Controllers\HealthCheckResultsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,3 +62,7 @@ Route::prefix('admin')->group(function () {
     Route::get('general-setting/datatable', [GeneralSettingController::class, 'datatable'])->name('general-setting.datatables');
     Route::resource('general-setting', GeneralSettingController::class);
 });
+
+// spaties health check
+Route::get('health', HealthCheckResultsController::class)->middleware('auth');
+Route::get('health?fresh', HealthCheckResultsController::class)->middleware('auth')->name('health-check');
