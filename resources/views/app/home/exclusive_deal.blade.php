@@ -1,5 +1,5 @@
 <!-- Start exclusive deal Area -->
-<section class="exclusive-deal-area mb-5">
+<section class="exclusive-deal-area mb-5" id="exclusive-deal">
     <div class="container-fluid">
         <div class="row justify-content-center align-items-center">
             <div class="col-lg-6 no-padding exclusive-left">
