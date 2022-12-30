@@ -16,6 +16,13 @@
             </div>
         </div>
 
+        <div class="row mt-3">
+            {{ Form::label('price', 'Price', ['class' => 'col-sm-2 col-form-label']) }}
+            <div class="col-sm-10">
+                {{ Form::number('price', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Price']) }}
+            </div>
+        </div>
+
         <!-- Quill Editor Full -->
         <div class="row mt-3  mb-5">
             {{ Form::label('description', 'Description', ['class' => 'col-sm-2 col-form-label']) }}

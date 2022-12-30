@@ -53,6 +53,23 @@ class Banner extends Model
         return $url;
     }
 
+    /**
+     * Remove tags from description
+     *
+     * @return string
+     */
+    public function getDescriptionHeaderAttribute()
+    {
+        $limit = 35;
+
+        $withoutTag = strip_tags($this->description);
+        $explode = explode(' ', $withoutTag, $limit);
+        $explode[$limit - 1] = '...';
+        $finalString = implode(' ', $explode);
+
+        return $finalString;
+    }
+
     public function getStatusAttribute()
     {
         $now = date('Y-m-d H:i:s');

@@ -1,10 +1,9 @@
 @extends('layouts.app')
 @section('content')
-    @include('app.home.slider-banner')
-
-    <div class="container">
-        @include('app.home.popup')
-        @include('app.home.categories')
-        @include('app.home.products')
-    </div>
+    @include('app.banner.slider-banner')
+    @include('app.home.feature')
+    @include('app.home.category')
+    @include('app.product.product_list')
+    @include('app.home.exclusive_deal')
+    @include('app.product.product_related')
 @endsection

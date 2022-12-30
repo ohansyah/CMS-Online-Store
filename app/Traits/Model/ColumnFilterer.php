@@ -55,12 +55,12 @@ trait ColumnFilterer
         if ($keyword = $request->get('search')) {
             $query->where(function($query) use ($keyword) {
                 if (isset($this->searchable)) {
-                    $query->where(array_first($this->searchable), 'like', '%' . $keyword . '%');
+                    $query->where($this->searchable[0], 'like', '%' . $keyword . '%');
                     for ($i=1; $i < count($this->searchable); $i++) {
                         $query->orWhere($this->searchable[$i], 'like', '%' . $keyword . '%');
                     }
                 } else {
-                    $query->where(array_first($this->fillable), 'like', '%' . $keyword . '%');
+                    $query->where($this->searchable[0], 'like', '%' . $keyword . '%');
                     for ($i=1; $i < count($this->fillable); $i++) {
                         $query->orWhere($this->fillable[$i], 'like', '%' . $keyword . '%');
                     }

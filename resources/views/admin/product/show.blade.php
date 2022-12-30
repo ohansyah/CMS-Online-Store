@@ -17,17 +17,19 @@
                 </div>
             </div>
 
-            <!-- Quill Editor Full -->
             <div class="row mt-3">
-                {{ Form::label('description', 'Description', ['class' => 'col-sm-2 col-form-label']) }}
-                <div class="col-sm-10 mb-5">
-                    {{ Form::hidden('description', null, ['type' => 'hidden', 'id' => 'quill-text']) }}
-                    <div class="quill-editor-full" id="quill-container">
-                        {!! $data->description !!}
-                    </div>
+                {{ Form::label('price', 'Price', ['class' => 'col-sm-2 col-form-label']) }}
+                <div class="col-sm-10">
+                    {{ Form::text('price', $data->price, ['class' => 'form-control','required' => 'required','placeholder' => 'Price','disabled']) }}
                 </div>
             </div>
-            <!-- End Quill Editor Full -->
+
+            <div class="row mt-3 mb-5">
+                {{ Form::label('description', 'Description', ['class' => 'col-sm-2 col-form-label']) }}
+                <div class="col-sm-10 mb-5">
+                    {!! $data->description !!}
+                </div>
+            </div>
 
             @if ($data->productImages->count() > 0)
                 @foreach ($data->productImages as $key => $image)

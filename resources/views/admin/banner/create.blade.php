@@ -40,12 +40,21 @@
         </div>
         <!-- End Quill Editor Full -->
 
+        <!-- Start Images Upload -->
         <div class="row">
-            {{ Form::label(null, null, ['class' => 'col-sm-2 col-form-label']) }}
-            <div class="col-sm-10">
-                {{ Form::file('image', ['class' => 'form-control', 'id' => 'formFile']) }}
+            {{ Form::label('image', 'Image', ['class' => 'col-sm-2 col-form-label']) }}
+            <div class="col-md-4 col-sm-10">
+                {{ Form::file('image', ['class' => 'form-control', 'id' => 'image_1', 'onchange' => 'previewImage(1)']) }}
             </div>
         </div>
+        
+        <div class="row mt-2">
+            {{ Form::label(null, null, ['class' => 'col-sm-2 col-form-label']) }}
+            <div class="col-sm-10" id="image_preview_1"></div>
+        </div>
+        <!-- End Images Upload -->
+
+
         <div class="row mt-3">
             {{ Form::label(null, null, ['class' => 'col-sm-2 col-form-label']) }}
             <div class="col-sm-10">
@@ -64,4 +73,5 @@
             $("#quill-text").val($("#quill-container").children().first().html());
         })
     </script>
+    <script src="{{ asset('niceadmin/js/image-preview.js') }}"></script>
 @endpush
