@@ -41,12 +41,23 @@ Route::prefix('product')->group(function () {
     Route::get('/{product}', [AppProduct::class, 'show'])->name('app.product.show');
 });
 
+/*
+|--------------------------------------------------------------------------
+| ADMIN Routes
+|--------------------------------------------------------------------------
+*/
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('dashboard');
     Route::get('/profile', [AdminUser::class, 'profile'])->name('admin.profile');
     Route::put('/profile', [AdminUser::class, 'update'])->name('admin.update');
     Route::post('/password/update', [AdminUser::class, 'updatePassword'])->name('admin.password.update');
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | FEATURED
+    |--------------------------------------------------------------------------
+    */
     // banner
     Route::get('banner/datatable', [BannerController::class, 'datatable'])->name('banner.datatables');
     Route::resource('banner', BannerController::class);
@@ -55,6 +66,12 @@ Route::prefix('admin')->group(function () {
     Route::get('hot-deals/datatable', [HotDealsController::class, 'datatable'])->name('hot-deals.datatables');
     Route::resource('hot-deals', HotDealsController::class);
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | MASTER DATA
+    |--------------------------------------------------------------------------
+    */
     // category
     Route::get('category/datatable', [CategoryController::class, 'datatable'])->name('category.datatables');
     Route::resource('category', CategoryController::class);
@@ -63,6 +80,12 @@ Route::prefix('admin')->group(function () {
     Route::get('product/datatable', [ProductController::class, 'datatable'])->name('product.datatables');
     Route::resource('product', ProductController::class);
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | SYSTEM
+    |--------------------------------------------------------------------------
+    */
     // general setting
     Route::get('general-setting/datatable', [GeneralSettingController::class, 'datatable'])->name('general-setting.datatables');
     Route::resource('general-setting', GeneralSettingController::class);
