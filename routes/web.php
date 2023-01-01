@@ -4,6 +4,7 @@
  * Admin CMS Controller
  */
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\HotDealsController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\ProductController;
@@ -49,6 +50,10 @@ Route::prefix('admin')->group(function () {
     // banner
     Route::get('banner/datatable', [BannerController::class, 'datatable'])->name('banner.datatables');
     Route::resource('banner', BannerController::class);
+
+    // hot-deals
+    Route::get('hot-deals/datatable', [HotDealsController::class, 'datatable'])->name('hot-deals.datatables');
+    Route::resource('hot-deals', HotDealsController::class);
 
     // category
     Route::get('category/datatable', [CategoryController::class, 'datatable'])->name('category.datatables');
