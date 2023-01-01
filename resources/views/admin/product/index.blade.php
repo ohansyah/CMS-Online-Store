@@ -11,6 +11,7 @@
                     <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">Category</th>
+                    <th scope="col">Price</th>
                     <th scope="col">Image</th>
                     <th scope="col">#</th>
                 </tr>
@@ -43,6 +44,10 @@
                     {
                         data: 'category',
                         name: 'category'
+                    },
+                    {
+                        data: 'price',
+                        name: 'price'
                     },
                     {
                         data: 'image',

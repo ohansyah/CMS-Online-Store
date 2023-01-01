@@ -6,7 +6,7 @@ function previewImage(id) {
     let ofReader = new FileReader();
     ofReader.readAsDataURL(image.files[0]);
     ofReader.onload = function (oFREvent) {
-        imagePreview.innerHTML = '<img id=' + att_id + ' name=' + att_id + ' class="img-thumbnail" src="' + oFREvent.target.result + '">';
+        imagePreview.innerHTML = '<img id=' + att_id + ' name=' + att_id + ' class="img-thumbnail-md" src="' + oFREvent.target.result + '">';
     }
 }
 
@@ -19,7 +19,7 @@ function previewImages() {
         let ofReader = new FileReader();
         ofReader.readAsDataURL(image.files[i])
         ofReader.onload = function (oFREvent) {
-            imagePreview.innerHTML += '<img class="img-thumbnail" src="' + oFREvent.target.result + '">';
+            imagePreview.innerHTML += '<img class="img-thumbnail-md" src="' + oFREvent.target.result + '">';
         }
     }
 }

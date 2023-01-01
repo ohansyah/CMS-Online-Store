@@ -21,6 +21,10 @@ class Product extends Model
         'updated_at',
     ];
 
+    protected $searchable = [
+        'name',
+    ];
+
     public static function boot(){
         parent::boot();
         static::deleted(function($model){
