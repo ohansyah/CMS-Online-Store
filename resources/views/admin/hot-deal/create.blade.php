@@ -105,7 +105,6 @@
 @push('scripts')
     <script src="{{ asset('niceadmin/js/image-preview.js') }}"></script>
 
-
     {{-- BOOTSTRAP MULTIPLE SELECT--}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
