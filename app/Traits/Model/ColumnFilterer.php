@@ -35,8 +35,15 @@ trait ColumnFilterer
         $columns = $this->fillable;
 
         foreach ($columns as $column) {
-            if (isset($attribute[$column]) && empty($attribute[$column])==false) {
-                $attribute[$column] == "null" ? $query->whereNull($column) : $query->where($column, $attribute[$column]);
+            if (isset($attribute[$column]) && empty($attribute[$column]) == false) {
+                $in = explode(",", $attribute[$column]);
+                if (!empty($in)) {
+                    $query->whereIn($column, $in);
+                } else if ($attribute[$column] == "null") {
+                    $query->whereNull($column);
+                } else {
+                    $query->where($column, $attribute[$column]);
+                }
             }
         }
 
@@ -53,15 +60,15 @@ trait ColumnFilterer
     public function scopeFilterByKeyword($query, Request $request)
     {
         if ($keyword = $request->get('search')) {
-            $query->where(function($query) use ($keyword) {
+            $query->where(function ($query) use ($keyword) {
                 if (isset($this->searchable)) {
                     $query->where($this->searchable[0], 'like', '%' . $keyword . '%');
-                    for ($i=1; $i < count($this->searchable); $i++) {
+                    for ($i = 1; $i < count($this->searchable); $i++) {
                         $query->orWhere($this->searchable[$i], 'like', '%' . $keyword . '%');
                     }
                 } else {
                     $query->where($this->searchable[0], 'like', '%' . $keyword . '%');
-                    for ($i=1; $i < count($this->fillable); $i++) {
+                    for ($i = 1; $i < count($this->fillable); $i++) {
                         $query->orWhere($this->fillable[$i], 'like', '%' . $keyword . '%');
                     }
                 }
