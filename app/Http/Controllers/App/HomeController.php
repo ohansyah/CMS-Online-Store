@@ -33,8 +33,8 @@ class HomeController extends Controller
         $categories = Category::parentCategory()->limit(6)->get();
         $products = Product::with(['category', 'productImages'])->orderBy('id', 'desc')->limit(16)->get();
         $jerseys = Product::with(['category', 'productImages'])->where('category_id', 7)->limit(4)->get();
-        $dealOfTheWeeks = Product::with(['category', 'productImages'])->inRandomOrder()->limit(6)->get();
-        
+
+        $dealOfTheWeeks = collect();
         $hotDeals = HotDeal::active()->limit(4)->get();
         foreach ($hotDeals as $hotDeal) {
             $query = Product::with(['category', 'productImages']);
@@ -46,6 +46,7 @@ class HomeController extends Controller
                     ->limit($hotDeal->data->product_total);
             }
             $hotDeal->products = $query->get();
+            $dealOfTheWeeks = $dealOfTheWeeks->merge($hotDeal->products);
         }
 
         return view('app.index')
@@ -56,7 +57,7 @@ class HomeController extends Controller
             ->with('latestProducts', $products->slice(0, 8))
             ->with('comingProducts', $products->slice(8, 8))
             ->with('jerseys', $jerseys)
-            ->with('dealOfTheWeeks', $dealOfTheWeeks)
+            ->with('dealOfTheWeeks', $dealOfTheWeeks->slice(0, 6))
             ->with('hotDeals', $hotDeals);
     }
 }
