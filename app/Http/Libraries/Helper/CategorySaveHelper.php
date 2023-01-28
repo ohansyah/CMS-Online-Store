@@ -18,7 +18,7 @@ class CategorySaveHelper
     {
         $category->parent_id = $request->input('parent_id');
         $category->name = $request->input('name');
-        $category->image = $uploadImage['file_name_to_store'] ?: $category->image;
+        $category->image = isset($uploadImage['file_name_to_store']) ? $uploadImage['file_name_to_store'] : $category->image;
         $category->save();
     }
 }
