@@ -1,5 +1,5 @@
 <!-- Start related-product Area -->
-<section class="related-product-area section_gap_bottom">
+<section class="related-product-area section_gap_bottom mt-5">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6 text-center">
@@ -23,7 +23,7 @@
             </div>
             <div class="col-lg-3">
                 <div class="ctg-right">
-                    <a href="#" target="_blank">
+                    <a href="{{ route('app.product.index') }}" target="_blank">
                         <img class="img-fluid d-block mx-auto" src="{{ asset('karma/img/category/c5.jpg') }}"
                             alt="">
                     </a>

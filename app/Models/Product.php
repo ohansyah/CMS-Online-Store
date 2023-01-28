@@ -13,6 +13,7 @@ class Product extends Model
     use HasFactory, ColumnFilterer, ColumnSorter, SoftDeletes;
 
     protected $fillable = [
+        'id',
         'name',
         'description',
         'price',
