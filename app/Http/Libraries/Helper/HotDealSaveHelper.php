@@ -21,7 +21,7 @@ class HotDealSaveHelper
         $hotDeal->type = $request->input('type');
         $hotDeal->start_date = $request->input('start_date');
         $hotDeal->end_date = $request->input('end_date');
-        $hotDeal->image = $uploadImage['file_name_to_store'] ?: $hotDeal->image;
+        $hotDeal->image = isset($uploadImage['file_name_to_store']) ? $uploadImage['file_name_to_store'] : $hotDeal->image;
 
         // mapping data
         $data = [];

@@ -21,7 +21,7 @@ class BannerSaveHelper
         $banner->type = $request->input('type');
         $banner->start_date = $request->input('start_date');
         $banner->end_date = $request->input('end_date');
-        $banner->image = $uploadImage['file_name_to_store'] ?: $banner->image;
+        $banner->image = isset($uploadImage['file_name_to_store']) ? $uploadImage['file_name_to_store'] : $banner->image;
         $banner->save();
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\Controller;
-use App\Models\GeneralSetting;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -19,8 +18,13 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $dealOfTheWeeks = Product::with(['category', 'productImages'])->inRandomOrder()->limit(6)->get();
         $product = Product::findOrFail($id);
+        $dealOfTheWeeks = Product::with(['category', 'productImages'])
+            ->where('category_id', $product->category_id)
+            ->inRandomOrder()
+            ->limit(6)
+            ->get();
+
         return view('app.product.show')
             ->with('product', $product)
             ->with('dealOfTheWeeks', $dealOfTheWeeks);
