@@ -4,6 +4,6 @@
     @include('app.home.feature')
     @include('app.home.category')
     @include('app.product.product_list')
-    @include('app.home.exclusive_deal')
-    @include('app.product.product_related')
+    @include('app.home.exclusive-deal')
+    @include('app.product.product-related')
 @endsection
