@@ -53,6 +53,6 @@
     </section>
     <!--================End Product Description Area =================-->
 
-    @include('app.product.product_related')
+    @include('app.product.product-related')
 
 @endsection
