@@ -27,8 +27,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $wa_link = GeneralSetting::where('name', 'wa_link')->first()->value;
-        // $popupBanner = Banner::popup()->active()->first();
         $banners = Banner::banner()->active()->orderBy('id', 'desc')->limit(5)->get();
         $categories = Category::parentCategory()->limit(6)->get();
         $products = Product::with(['category', 'productImages'])->orderBy('id', 'desc')->limit(16)->get();
@@ -50,8 +48,6 @@ class HomeController extends Controller
         }
 
         return view('app.index')
-            ->with('wa_link', $wa_link)
-            // ->with('popupBanner', $popupBanner)
             ->with('banners', $banners)
             ->with('categories', $categories)
             ->with('latestProducts', $products->slice(0, 8))
