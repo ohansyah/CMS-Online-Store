@@ -1253,9 +1253,9 @@ h1, h2, h3, h4, h5, h6 {
           line-height: 46px; } }
     .banner-area .banner-content p {
       margin: 0; }
-  @media (max-width: 991px) {
+  /* @media (max-width: 991px) {
     .banner-area .banner-img {
-      display: none; } }
+      display: none; } } */
 
 .add-bag {
   margin-top: 30px; }

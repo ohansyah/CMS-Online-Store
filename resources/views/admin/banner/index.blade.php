@@ -29,6 +29,7 @@
     <script>
         $(document).ready(function() {
             $('#banners-table').DataTable({
+                responsive: true,
                 processing: true,
                 serverSide: true,
                 order: [

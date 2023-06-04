@@ -6,7 +6,7 @@
                 <div class="row">
 
                     @foreach ($categories as $category)
-                        <div class="col-lg-4 col-md-4">
+                        <div class="col-6 col-md-4">
                             <div class="single-deal">
                                 <div class="overlay"></div>
                                 <img class="img-fluid w-100" src="{{ $category->image_url }}" alt="">

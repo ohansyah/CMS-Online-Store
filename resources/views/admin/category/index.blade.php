@@ -27,6 +27,7 @@
     <script>
         $(document).ready(function() {
             $('#categories-table').DataTable({
+                responsive: true,
                 processing: true,
                 serverSide: true,
                 order: [
