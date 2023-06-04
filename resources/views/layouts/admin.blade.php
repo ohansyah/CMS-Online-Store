@@ -35,7 +35,6 @@
     <link href="{{ asset('niceadmin/vendor/quill/quill.snow.css') }}" rel="stylesheet">
     <link href="{{ asset('niceadmin/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
     <link href="{{ asset('niceadmin/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
-    <link href="{{ asset('niceadmin/vendor/simple-datatables/style.css') }}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('niceadmin/css/style.css') }}" rel="stylesheet">
@@ -45,6 +44,7 @@
         crossorigin="anonymous"></script>
 
     <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.4/datatables.min.css" />
 
 
@@ -92,6 +92,7 @@
 
     <!-- DataTables -->
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.4/datatables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 
     <!-- Script from content -->
     @stack('scripts')

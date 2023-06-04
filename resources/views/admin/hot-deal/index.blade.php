@@ -29,6 +29,7 @@
     <script>
         $(document).ready(function() {
             $('#hot-deals-table').DataTable({
+                responsive: true,
                 processing: true,
                 serverSide: true,
                 order: [

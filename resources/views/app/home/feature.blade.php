@@ -4,8 +4,8 @@
         <div class="container">
             <div class="row features-inner">
                 <!-- single features -->
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="single-features">
+                <div class="col-6 col-lg-3">
+                    <div class="single-features mt-0">
                         <div class="f-icon">
                             <img src="{{ asset('karma/img/features/f-icon1.png') }}" alt="">
                         </div>
@@ -14,8 +14,8 @@
                     </div>
                 </div>
                 <!-- single features -->
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="single-features">
+                <div class="col-6 col-lg-3">
+                    <div class="single-features mt-0">
                         <div class="f-icon">
                             <img src="{{ asset('karma/img/features/f-icon2.png') }}" alt="">
                         </div>
@@ -24,8 +24,8 @@
                     </div>
                 </div>
                 <!-- single features -->
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="single-features">
+                <div class="col-6 col-lg-3">
+                    <div class="single-features mt-0">
                         <div class="f-icon">
                             <img src="{{ asset('karma/img/features/f-icon3.png') }}" alt="">
                         </div>
@@ -34,8 +34,8 @@
                     </div>
                 </div>
                 <!-- single features -->
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="single-features">
+                <div class="col-6 col-lg-3">
+                    <div class="single-features mt-0">
                         <div class="f-icon">
                             <img src="{{ asset('karma/img/features/f-icon4.png') }}" alt="">
                         </div>

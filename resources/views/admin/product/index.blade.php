@@ -27,6 +27,7 @@
     <script>
         $(document).ready(function() {
             $('#product-table').DataTable({
+                responsive: true,
                 processing: true,
                 serverSide: true,
                 order: [
